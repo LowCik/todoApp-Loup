@@ -7,7 +7,7 @@ const store = useTodoListStore();
 
 function addItemAndClear(item) {
   if (item.length === 0) {
-    alert("You didin't type in anything");
+    alert("You didn't type in anything");
     return;
   }
   store.addTodo(item);

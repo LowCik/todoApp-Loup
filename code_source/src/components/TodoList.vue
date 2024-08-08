@@ -3,18 +3,25 @@ import { useTodoListStore } from "@/stores/todoList";
 import { storeToRefs } from "pinia";
 import AnimatedTrashBin from "./AnimatedTrashBin.vue";
 import CheckMark from "./CheckMark.vue";
+
+
 const store = useTodoListStore();
 
 const { todoList } = storeToRefs(store);
 
-const { toggleCompleted, deleteTodo } = store;
+const { toggleCompleted, deleteTodo, persistToLocalStorage } = store;
 </script>
 
 <template>
   <TransitionGroup name="todo-list">
     <div v-for="todo in todoList" :key="todo.id" class="item">
       <div class="content">
-        <span :class="{ completed: todo.completed }">{{ todo.item }}</span>
+        <input
+          v-model="todo.item"
+          :class="{ completed: todo.completed }"
+          class="todo-item__list"
+          @keyup="persistToLocalStorage()"
+        />
         <div class="action_buttons">
           <span @click.stop="deleteTodo(todo.id)" class="alert">
             <AnimatedTrashBin />
@@ -27,6 +34,11 @@ const { toggleCompleted, deleteTodo } = store;
 </template>
 
 <style scoped>
+.todo-item__list {
+  border: none;
+  background-color: rgba(240, 255, 255, 0);
+  width: 70%;
+}
 .todo-list-enter-active,
 .todo-list-leave-active {
   transition: all 0.5s ease;
