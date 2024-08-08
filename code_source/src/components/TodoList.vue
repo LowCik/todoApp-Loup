@@ -4,7 +4,6 @@ import { storeToRefs } from "pinia";
 import AnimatedTrashBin from "./AnimatedTrashBin.vue";
 import CheckMark from "./CheckMark.vue";
 
-
 const store = useTodoListStore();
 
 const { todoList } = storeToRefs(store);
@@ -34,6 +33,9 @@ const { toggleCompleted, deleteTodo, persistToLocalStorage } = store;
 </template>
 
 <style scoped>
+.action_buttons {
+  padding-top: 10px;
+}
 .todo-item__list {
   border: none;
   background-color: rgba(240, 255, 255, 0);
